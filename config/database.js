@@ -6,10 +6,10 @@ const env = process.env.NODE_ENV || "development";
 const { database, username, host, dialect, password } =
   extractDatabaseCredentials(process.env.DATABASE_URL);
 
-// if (env !== "production") {
-//   dotenv.config({ path: ".env.development" });
+// if (env !== 'production') {
+//     dotenv.config({ path: '.env.development' });
 // } else {
-//   dotenv.config();
+//     dotenv.config();
 // }
 
 // DEV ONLY

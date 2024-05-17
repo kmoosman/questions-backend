@@ -8,21 +8,11 @@ import cors from "cors";
 dotenv.config();
 const app = express();
 
-// const corsOptions = {
-//   origin: '',
-//   credentials: true
-// };
 const corsOptions = {
   origin: "https://questions.medtechstack.com",
   credentials: true,
   allowedHeaders: ["Content-Type", "Authorization"],
 };
-
-// const corsOptions = {
-//   origin: "http://localhost:5173",
-//   credentials: true,
-//   allowedHeaders: ["Content-Type", "Authorization"],
-// };
 
 app.use(cors(corsOptions));
 
