@@ -1,8 +1,8 @@
 CREATE TABLE collections (
     collection_id UUID PRIMARY KEY,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    expires_at TIMESTAMP WITH TIME ZONE
-    code_word TEXT NOT NULL,
+    expires_at TIMESTAMP WITH TIME ZONE,
+    code_word TEXT NOT NULL
 );
 
 CREATE TABLE collection_items (

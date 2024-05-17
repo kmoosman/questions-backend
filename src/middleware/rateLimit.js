@@ -4,7 +4,7 @@ export const collectionSessionLimiter = rateLimit({
   max: 1,
   keyGenerator: (req) => req.ip,
   handler: (req, res) => {
-    if (request.rateLimit.used === request.rateLimit.limit + 1) {
+    if (req.rateLimit.used === req.rateLimit.limit + 1) {
       console.log("Rate limit exceeded");
     }
     return res
