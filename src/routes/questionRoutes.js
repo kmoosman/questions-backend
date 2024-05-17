@@ -11,7 +11,7 @@ router.get("/", getAllQuestions);
 
 router.get("/:id", getCollectionById);
 
-router.post("/create", collectionSessionLimiter, createCollection);
+router.post("/create", createCollection);
 
 // router.get("/:id", getQuestionsByCancerType);
 
