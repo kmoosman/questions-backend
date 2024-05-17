@@ -18,7 +18,7 @@ export const getAllQuestions = async (req, res) => {
 
 export const createCollection = async (req, res) => {
   try {
-    if (req.body.betaCode !== process.env.BETA_CODE) {
+    if (req.body.betaCode !== "chromie") {
       return res.status(401).json({ message: "Invalid beta code" });
     }
     const id = uuidv4();
@@ -31,7 +31,7 @@ export const createCollection = async (req, res) => {
         const collectionToAdd = {
           collectionId: id,
           type: item.type,
-          title: item.title.replace("'", "\\"),
+          title: item.title.replace("'", "''"),
           important: item.important,
           reference:
             item.reference === "undefined" || item.reference === "null"
@@ -58,9 +58,9 @@ export const getCollectionById = async (req, res) => {
   try {
     const results = await getCollectionByIdService(id);
     //convert the title back to the original form
-    results.collection.map((item) => {
-      item.title = item.title.replace("\\", "'");
-    });
+    // results.collection.map((item) => {
+    //   item.title = item.title.replace("\\", "'");
+    // });
     res.json(results);
   } catch (error) {
     res.status(500).json({ message: error.message });
