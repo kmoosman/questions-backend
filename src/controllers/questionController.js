@@ -31,7 +31,7 @@ export const createCollection = async (req, res) => {
         const collectionToAdd = {
           collectionId: id,
           type: item.type,
-          title: item.title,
+          title: item.title.replace("'", "\\'"),
           important: item.important,
           reference:
             item.reference === "undefined" || item.reference === "null"
@@ -57,6 +57,10 @@ export const getCollectionById = async (req, res) => {
   const id = req.params.id;
   try {
     const results = await getCollectionByIdService(id);
+    //convert the title back to the original form
+    results.collection.map((item) => {
+      item.title = item.title.replace("\\'", "'");
+    });
     res.json(results);
   } catch (error) {
     res.status(500).json({ message: error.message });
