@@ -12,8 +12,14 @@ const app = express();
 //   origin: '',
 //   credentials: true
 // };
+// const corsOptions = {
+//   origin: "https://questions.medtechstack.com",
+//   credentials: true,
+//   allowedHeaders: ["Content-Type", "Authorization"],
+// };
+
 const corsOptions = {
-  origin: "https://questions.medtechstack.com",
+  origin: "http://localhost:5173",
   credentials: true,
   allowedHeaders: ["Content-Type", "Authorization"],
 };

@@ -45,3 +45,64 @@ ORDER BY
     throw error;
   }
 };
+
+// CREATE TABLE collections (
+//   collection_id SERIAL PRIMARY KEY,
+//   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+//   expires_at TIMESTAMP WITH TIME ZONE
+//   code_word TEXT NOT NULL,
+// );
+
+// CREATE TABLE collection_items (
+//   item_id SERIAL PRIMARY KEY,
+//   collection_id INTEGER NOT NULL,
+//   type VARCHAR(255) NOT NULL,
+//   title TEXT NOT NULL,
+//   important BOOLEAN NOT NULL,
+//   reference TEXT,
+//   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+//   updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+//   FOREIGN KEY (collection_id) REFERENCES collections(collection_id)
+// );
+
+export const createCollectionService = async (data) => {
+  try {
+    const query = `INSERT INTO collections (collection_id, code_word) VALUES ('${data.id}', '${data.codeWord}') RETURNING collection_id;`;
+    const collection = await sequelize.query(query, {
+      type: sequelize.QueryTypes.INSERT,
+    });
+
+    return deepCamelcaseKeys(collection[0]);
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const createCollectionItemSerivce = async (data, collectionId) => {
+  const itemId = uuidv4();
+  try {
+    const query = `INSERT INTO collection_items (item_id, collection_id, type, title, important, reference) VALUES ('${itemId}', '${collectionId}', '${data.type}', '${data.title}', ${data.important}, '${data.reference}');`;
+    const item = await sequelize.query(query, {
+      type: sequelize.QueryTypes.INSERT,
+    });
+
+    return deepCamelcaseKeys(item);
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const getCollectionByIdService = async (id) => {
+  try {
+    const query = `SELECT * FROM collection_items WHERE collection_id = '${id}';`;
+    const collection = await sequelize
+      .query(query, { type: sequelize.QueryTypes.SELECT })
+      .then((result) => result);
+    return deepCamelcaseKeys(collection);
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};

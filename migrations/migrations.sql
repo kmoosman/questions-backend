@@ -50,7 +50,3 @@ VALUES
 ('How will my kidney function be monitored during and after treatment?', 'disease specific'),
 ('What lifestyle changes should I consider to support my treatment and recovery?', 'lifestyle');
 
-select questions.name, disease_type.name, disease_subtype.name from questions_by_disease
-inner join questions on questions_by_disease.question_id = questions.id
-inner join disease_type on questions_by_disease.disease_type_id = disease_type.id
-inner join disease_subtype on questions_by_disease.disease_subtype_id = disease_subtype.id;
