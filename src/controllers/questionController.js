@@ -18,7 +18,7 @@ export const getAllQuestions = async (req, res) => {
 
 export const createCollection = async (req, res) => {
   try {
-    if (req.body.betaCode !== "chromie") {
+    if (req.body.betaCode !== process.env.BETA_CODE) {
       return res.status(401).json({ message: "Invalid beta code" });
     }
     const id = uuidv4();
